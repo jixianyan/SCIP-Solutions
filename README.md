@@ -1,2 +1,2 @@
-# SCIP-Solutions
-My solution to SCIP.
+# SICP-Solutions
+My solutions to SICP.
