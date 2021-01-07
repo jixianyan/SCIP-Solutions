@@ -10,16 +10,13 @@
   (if (good-enough? guess x)
       guess
       (sqrt-iter (improve guess x)
-                          x)))
+                 x)))
                           
 (define (improve guess x)
   (average guess (/ x guess)))
   
 (define (average x y)
   (/ (+ x y) 2))
-  
-(define (square x)
-  (* x x))
   
 (define (good-enough? guess x)          ;Instead of detecting the difference between the square of guess and x,
   (< (abs (- (improve guess x) guess))  ;we detect the difference between the old and new guesses and 0.001 times the old guess.
