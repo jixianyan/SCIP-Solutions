@@ -1,0 +1,116 @@
+\documentclass{article}
+
+\usepackage[paper=a4paper,vmargin=0.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\hypersetup{colorlinks}
+
+
+\begin{document}
+
+\title{SICP 1.13 Solution}
+\author{Jixian Yan}
+\date{\url{https://github.com/jixianyan/SICP-Solutions}}
+\maketitle
+
+\section*{Problem:}
+
+    \[
+        Fib(n) = \left\{ 
+                 \begin {array}{ll}
+                 0 & \textrm{if $n = 0$} \\
+                 1 & \textrm{if $n = 1$} \\
+                 Fib(n - 1) + Fib(n - 2) & \textrm{otherwise}
+                 \end{array}
+                 \right.
+    \]
+    Prove that $Fib(n)$ is the closest integer to $\varphi^{n} / \sqrt{5}$, where 
+    $\varphi = (1 + \sqrt{5}) / 2$. Hint: Let $\psi = (1 - \sqrt{5}) / 2$.
+    Use induction and the definition of the Fibonacci numbers(see Section 1.2.2)
+	to prove that $Fib(n) = (\varphi^{n} - \psi^{n})/\sqrt{5}$.
+
+\section*{Proof:}
+
+
+    First, prove that 
+    \begin{eqnarray}
+        Fib(n) = \frac{\varphi^{n} - \psi^{n}}{\sqrt{5}}
+    \end{eqnarray}
+
+
+	\noindent
+	Assume that
+	\begin{eqnarray}
+        Fib(n) = \frac{\varphi^{n} - \psi^{n}}{\sqrt{5}}
+    \end{eqnarray}
+
+
+	\noindent
+	Then
+	\begin{eqnarray}
+		Fib(n + 1) &=& \frac{\varphi^{n+1} - \psi^{n+1}}{\sqrt{5}} \nonumber \\
+                   &=& \frac{\varphi^{n}\cdot\varphi - \psi^{n}\cdot\psi}{\sqrt{5}} \nonumber \\
+                   &=& \frac{\varphi^n\cdot{\displaystyle\frac{1+\sqrt5}2 - \psi^n}\cdot{\displaystyle
+                       \frac{1 - \sqrt5}2}}{\sqrt5} \nonumber \\
+				   &=& \frac12\;\cdot\left(\frac{\varphi^n - \psi^n +
+						{\displaystyle\sqrt5\cdot\left(\varphi^n+\psi^n\right)}}{\sqrt5}\right) \nonumber \\
+               	   &=& \frac12\;\cdot Fib(n)+\frac{\varphi^n+\psi^n}2
+	\end{eqnarray}
+	\begin{eqnarray}
+		Fib(n + 2) &=& \frac{\varphi^{n+2} - \psi^{n+2}}{\sqrt{5}} \nonumber \\
+                   &=& \frac{\varphi^{n}\cdot\varphi^2 - \psi^{n}\cdot\psi^2}{\sqrt{5}} \nonumber \\
+                   &=& \frac{\varphi^n\cdot({\displaystyle\frac{1+\sqrt5}2)^2 - \psi^n}\cdot({\displaystyle
+                       \frac{1 - \sqrt5}2)^2}}{\sqrt5} \nonumber \\
+				   &=& \frac{\varphi^n\cdot{\displaystyle\frac{1+5+2\sqrt5}4}- 
+						\psi^n\cdot{\displaystyle\frac{1+5-2\sqrt5}4}}{\sqrt5} \nonumber \\
+				   &=& \frac12\left(\frac{3\left(\varphi^n-\psi^n\right)+
+                        \sqrt5\left(\varphi^n+\psi^n\right)}{\sqrt5}\right) \nonumber \\
+               	   &=& \frac32\;\cdot Fib(n)+\frac{\varphi^n+\psi^n}2
+	\end{eqnarray}
+
+
+	\noindent
+	It can be proved that
+	\begin{eqnarray}
+		Fib(n+2)=Fib(n+1)+Fib(n)
+	\end{eqnarray}
+
+
+	\noindent
+	And because
+	\begin{eqnarray}
+		\frac{\varphi^0-\psi^0}{\sqrt5}=0=Fib\left(0\right) \\
+		\frac{\varphi^1-\psi^1}{\sqrt5}=1=Fib\left(1\right)
+	\end{eqnarray}
+	From this it is clear that (1) is true.
+
+
+	\noindent
+	Thus $Fib(n)$ can spilt into the form of the difference of two numbers:
+	\begin{eqnarray}
+		Fib\left(n\right)=\frac{\varphi^n-\psi^n}{\sqrt5}=\frac{\varphi^n}{\sqrt5}-\frac{\psi^n}{\sqrt5}
+	\end{eqnarray}
+
+
+	\noindent
+	And
+	\begin{eqnarray}
+		\frac1{\sqrt5}<\frac12
+		\left|\psi\right|=\left|\frac{1-\sqrt5}2\right|<1
+	\end{eqnarray}
+	Therefore,
+	\begin{eqnarray}
+		\left|\frac{\psi^n}{\sqrt5}\right|<\frac12
+	\end{eqnarray}
+	i.e.
+	\begin{eqnarray}
+		\left|Fib(n)-\frac{\varphi^n}{\sqrt5}\right|=\frac{\psi^n}{\sqrt5}<\frac12
+	\end{eqnarray}
+	Therefore, $Fib(n)$ is the closest integer to $\varphi^{n} / \sqrt{5}$.\\
+	
+	\noindent
+	Q.E.D
+
+        
+\end{document}
